@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Julia Harper / Assignment 5 -272 Data Structures
  *
  *   This java file contains the problem solutions of isSubSet, findKthLargest,
  *   and sort2Arrays methods. You should utilize the Java Collection Framework for
@@ -8,15 +8,17 @@
  *
  ********************************************************************/
 
-import java.util.*;
+import java.util.*; 
 
-class ProblemSolutions {
+
+
+public class ProblemSolutions { 
 
     /**
      * Method: isSubset()
      *
      * Given two arrays of integers, A and B, return whether
-     * array B is a subset if array A. Example:
+     * array B is a subset of array A. Example:
      *      Input: [1,50,55,80,90], [55,90]
      *      Output: true
      *      Input: [1,50,55,80,90], [55,90, 99]
@@ -29,13 +31,15 @@ class ProblemSolutions {
      * @param list2 - input array B
      * @return      - returns boolean value B is a subset of A.
      */
-
-    public boolean isSubset(int list1[], int list2[]) {
-
-        // ADD YOU CODE HERE -- DON'T FORGET TO ADD YOR NAME AT TOP OF FILE
-
-        return false;
-    }
+    //checks if array B is a subset of array A
+    public boolean isSubset(int[] list1, int[] list2) { //method start
+        HashSet<Integer> setA = new HashSet<>(); //store all elements of A
+        for (int a : list1) setA.add(a); //populate hashset
+        for (int b : list2) { //loop through B
+            if (!setA.contains(b)) return false; //if B element not in A, return false
+        }
+        return true; //if all B elements found, return true
+    } //end isSubset
 
 
     /**
@@ -50,13 +54,15 @@ class ProblemSolutions {
      * @param k     - the kth maximum element
      * @return      - the value in the array which is the kth maximum value
      */
-
-    public int findKthLargest(int[] array, int k) {
-
-        // ADD YOUR CODE HERE
-
-        return 0;
-    }
+    //finds the kth largest number in array using a min-heap
+    public int findKthLargest(int[] array, int k) { //method start
+        PriorityQueue<Integer> pq = new PriorityQueue<>(); //create min-heap
+        for (int n : array) { //loop over array
+            pq.add(n); //add element to heap
+            if (pq.size() > k) pq.poll(); //keep only k largest
+        }
+        return pq.peek(); //top of heap is kth largest
+    } //end findKthLargest
 
 
     /**
@@ -71,12 +77,17 @@ class ProblemSolutions {
      * @param array2    - Input array 2
      * @return          - Sorted array with all elements in A and B.
      */
+    //merges and sorts two arrays using a priority queue
+    public int[] sort2Arrays(int[] array1, int[] array2) { //method start
+        PriorityQueue<Integer> pq = new PriorityQueue<>(); //create min-heap
+        for (int n : array1) pq.add(n); //add array1 elements
+        for (int n : array2) pq.add(n); //add array2 elements
 
-    public int[] sort2Arrays(int[] array1, int[] array2) {
-
-        // ADD YOU CODE HERE
-
-        return null;
-    }
-
-}
+        int[] result = new int[pq.size()]; //prepare result array
+        int i = 0; //index counter
+        while (!pq.isEmpty()) { //extract all elements in sorted order
+            result[i++] = pq.poll(); //poll min each time
+        }
+        return result; //return sorted array
+    } //end sort2Arrays
+} 
